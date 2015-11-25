@@ -7,7 +7,6 @@ class Lorenz {
   float rho = 28.0;
   float beta = 8.0 / 3.0;
   float t = 0.01;
-  float scale = 10.0;
   
   PVector prevCoord = new PVector(x, y, z);
   PVector currCoord = new PVector(x, y, z);
@@ -18,6 +17,11 @@ class Lorenz {
     this.beta = beta;
   }
   
+  PVector sphericalProjection(PVector v) {
+    final float radius = 250.0;
+    float len = v.mag();
+    return PVector.mult(v, radius/len);
+  }
   
   void step() {
     float xt = x + t * sigma * (y - x);
@@ -37,9 +41,9 @@ class Lorenz {
   }
   
   void render() {
-    prevCoord.mult(scale);
-    currCoord.mult(scale);
-    line(prevCoord.x, prevCoord.y, prevCoord.z, currCoord.x, currCoord.y, currCoord.z);
+    PVector a = sphericalProjection(prevCoord);
+    PVector b = sphericalProjection(currCoord);
+    line(a.x, a.y, a.z, b.x, b.y, b.z);
   }
   
 }

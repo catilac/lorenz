@@ -14,5 +14,5 @@ void draw() {
 }
 
 void setupCamera() {
- camera(-width, -height, 0, width, height, height, 0, 1, 0);
+  camera(width/2, -75, width * 0.7, 0, 0, 0, 0, 1, 0);
 }
